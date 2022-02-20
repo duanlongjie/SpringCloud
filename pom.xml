@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--父工程项目，其他模块都继承此工程。此工程的依赖定义版本号，则子模块引入依赖时不用制定版本号-->
+    <groupId>com.dlj</groupId>
+    <artifactId>spring-cloud</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>api</module>
+        <module>provider</module>
+        <module>consumer</module>
+    </modules>
+    <packaging>pom</packaging>
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <junit.version>4.12</junit.version>
+        <log4j.version>1.2.17</log4j.version>
+        <lombok.version>1.16.18</lombok.version>
+    </properties>
+    <!--<parent>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-starter-parent</artifactId>-->
+        <!--&lt;!&ndash; 2.2.5.RELEASE 不知道为什么，莫名的出现 该异常：-->
+            <!--Unable to start web server; nested exception is org.springframework.boot.web.server.WebServerException:-->
+            <!--Unable to start embedded Tomcat-->
+            <!--所以改为 2.1.8.RELEASE&ndash;&gt;-->
+        <!--<version>2.1.8.RELEASE</version>-->
+        <!--<relativePath/>-->
+    <!--</parent>-->
+    <!--
+         dependencyManagement 与 dependencies 的区别
+         1. 相对于dependencyManagement，所有声明在dependencies里的依赖都会自动引入，并默认被所有的子项目继承。
+         2. dependencies即使在子项目中不写该依赖项，那么子项目仍然会从父项目中继承该依赖项（全部继承）
+         3. dependencyManagement里只是声明依赖，并不实现引入，因此子项目需要显示的声明需要用的依赖。
+            如果不在子项目中声明依赖，是不会从父项目中继承下来的；只有在子项目中写了该依赖项，
+            并且没有指定具体版本，才会从父项目中继承该项，并且version和scope都读取自父pom;
+            另外如果子项目中指定了版本号，那么会使用子项目中指定的jar版本。
+    -->
+    <!--
+         SpringCloud 配置
+         Spring-cloud-dependencies也是一个依赖管理器的pom文件，与spring-boot-starter-parent的作用一样，
+         不同的是spring-cloud-dependencies是对cloud的依赖管理。
+         如：spring-cloud-starter-config、spring-cloud-starter-netflix-eureka-server
+     -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>2.1.8.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
