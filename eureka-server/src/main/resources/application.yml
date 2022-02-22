@@ -1,0 +1,26 @@
+server:
+  port: 8001 # http://localhost:8001/  访问Eureka的web控制台
+
+
+spring:
+  application:
+    name: eureka-server
+
+eureka:
+  server:
+    eviction-interval-timer-in-ms: 1000 #设置清理的间隔时间，而后这个时间使用的是毫秒单位（默认是60秒）
+    enable-self-preservation: false #设置为false表示关闭保护模式
+    peer-node-read-timeout-ms: 1000
+  client:
+    fetch-registry: false  # 是否允许 Eureka Client 从 Eureka Server上获取服务的注册信息 （默认是 true ：允许） # 由于注册中心的职责就是维护服务实例, 它并不需要去检索服务, 所以也设置为 false
+    register-with-eureka: false # 由于该应用为注册中心, 所以设置为false, 代表不向注册中心注册自己
+    service-url:
+      defaultZone: http://iie:1qa2WS3ed@10.136.130.191:8001/eureka,http://iie:1qa2WS3ed@10.136.130.192:8001/eureka,http://iie:1qa2WS3ed@10.136.138.99:8001/eureka
+    initial-instance-info-replication-interval-seconds: 1 #客户端信息上报到服务的周期，默认40s
+    registry-fetch-interval-seconds: 1 #客户端拉取服务器配置信息的周期，默认30s
+#    registry-fetch-interval-seconds: 30 # Eureka Client 上缓存的服务注册信息，定期更新的时间间隔，默认30秒：
+#  instance:
+#    instance-id: ybk-eureka1
+
+#logging:
+#  config: spring-logback-191.xml #日志配置文件
