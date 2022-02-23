@@ -20,6 +20,15 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+        <!--Eureka 自带了一个 Web 的管理页面，方便我们查询注册到上面的实例信息，
+        但是有一个问题：如果在实际使用中，注册中心地址有公网 IP 的话，必然能直
+        接访问到，这样是不安全的。所以我们需要对 Eureka 进行改造，加上权限认证
+        来保证安全性。改造我们的 eureka-server，通过集成 Spring-Security 来进行安全认证。
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
     </dependencies>
 
 
