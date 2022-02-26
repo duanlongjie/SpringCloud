@@ -27,6 +27,42 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--
+            该依赖可以不加，因为eureka已经引用了 Ribbon
+            ribbon 负载均衡。客户端（这里具体是消费者）做负载均衡。
+            如果生产者实例有多个的话，ribbon可以做负载均衡。
+            RestTemplate中加入 @LoadBalanced注解
+        -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+        </dependency>
+        <!--spring cloud Feign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <!--spring cloud hystrix-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-netflix-turbine</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+        </dependency>
     </dependencies>
 
 

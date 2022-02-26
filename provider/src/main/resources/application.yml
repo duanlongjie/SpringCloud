@@ -1,13 +1,34 @@
+spring:
+  profiles:
+    active: provider2 #指定适用哪个配置进行启动
+
+---
+server:
+  port: 8888
+eureka:
+  client:
+    service-url:
+      defaultZone: http://dlj:159786@localhost:8001/eureka/,http://dlj:159786@localhost:8002/eureka/,http://dlj:159786@localhost:8003/eureka/ # Eureka 服务的地址，在启动的时候需要将自身的信息注册到 Eureka 中去
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
+    prefer-ip-address: true # 采用IP注册
+
+spring:
+  application:
+    name: provider-application
+  profiles: provider1
+---
 server:
   port: 8899
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8001/eureka/ # Eureka 服务的地址，在启动的时候需要将自身的信息注册到 Eureka 中去
+      defaultZone: http://dlj:159786@localhost:8001/eureka/,http://dlj:159786@localhost:8002/eureka/,http://dlj:159786@localhost:8003/eureka/ # Eureka 服务的地址，在启动的时候需要将自身的信息注册到 Eureka 中去
   instance:
-    instance-id: provider
+    instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}:${server.port}
     prefer-ip-address: true # 采用IP注册
+
 spring:
   application:
-    name: provider
-
+    name: provider-application
+  profiles: provider2

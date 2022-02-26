@@ -2,12 +2,17 @@ server:
   port: 80
 spring:
   application:
-    name: consumer
+    name: consumer-application
 
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8001/eureka/ # Eureka 服务的地址，在启动的时候需要将自身的信息注册到 Eureka 中去
+      defaultZone: http://dlj:159786@localhost:8001/eureka/,http://dlj:159786@localhost:8002/eureka/,http://dlj:159786@localhost:8003/eureka/ # Eureka 服务的地址，在启动的时候需要将自身的信息注册到 Eureka 中去
   instance:
-    instance-id: consumer
+    instance-id: consumer-instance
     prefer-ip-address: true # 采用IP注册
+feign:
+  hystrix:
+    enabled: true #开启Feign对Hystrix的支持
+zuul:
+  routes:

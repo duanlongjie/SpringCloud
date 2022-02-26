@@ -12,6 +12,7 @@
         <module>provider</module>
         <module>consumer</module>
         <module>eureka-server</module>
+        <module>ribbon-native</module>
     </modules>
     <packaging>pom</packaging>
     <properties>

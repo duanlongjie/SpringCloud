@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import provider.service.UserService;
 
 @RestController
-public class UserController {
+public class UserController{
     private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     @Autowired
     private UserService userService;
@@ -19,7 +19,7 @@ public class UserController {
        return userService.save(user);
     }
     @GetMapping("get")
-    public User save(@RequestParam("id") Long id){
+    public User get(@RequestParam("id") Long id){
         LOG.info("id : {}",id);
         return userService.get(id);
     }
