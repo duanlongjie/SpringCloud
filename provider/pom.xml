@@ -22,7 +22,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- eureka 该服务需要注册到eureka，所有要加eureka-client依赖-->
+        <!-- eureka 该服务需要注册到eureka，所以要加eureka-client依赖-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
