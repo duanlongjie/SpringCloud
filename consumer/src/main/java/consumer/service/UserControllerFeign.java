@@ -7,8 +7,8 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 // provider-application 注册在eureka的生产者应用名 即spring.application.name
-//fallback = UserControllerFeignFallback.class  hystrix fallback 使用方式
-//fallbackFactory = UserControllerFeignFallbackFactory.class hystrix fallbackFactory 使用方式
+//fallback = UserControllerFeignFallback.class  Hystrix fallback 使用方式
+//fallbackFactory = UserControllerFeignFallbackFactory.class Hystrix fallbackFactory 使用方式
 @FeignClient(value = "provider-application",configuration = FeignConfiguration.class,
         fallbackFactory = UserControllerFeignFallbackFactory.class)
 public interface UserControllerFeign {
