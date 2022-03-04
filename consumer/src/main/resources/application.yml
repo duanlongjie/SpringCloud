@@ -1,9 +1,10 @@
 server:
   port: 80
+#  servlet:
+#    context-path: /consumer-application/
 spring:
   application:
     name: consumer-application
-
 eureka:
   client:
     service-url:

@@ -1,0 +1,13 @@
+#gateway最简单的使用方式，跳转
+
+server:
+  port: 7777
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: path_route
+          uri: http://www.52download.cn
+          predicates:
+            - Path=/wpcourse

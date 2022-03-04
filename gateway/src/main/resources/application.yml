@@ -1,0 +1,24 @@
+server:
+  port: 7777
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://dlj:159786@localhost:8001/eureka/,http://dlj:159786@localhost:8002/eureka/,http://dlj:159786@localhost:8003/eureka/ # Eureka 服务的地址，在启动的时候需要将自身的信息注册到 Eureka 中去
+  instance:
+    instance-id: gateway-instance
+    prefer-ip-address: true # 采用IP注册
+spring:
+  application:
+    name: gateway-application
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true # Eureka 的默认路由,注册在eureka的实例，都可以通过  http://gatewayip:port/APPLICATION-NAME/..访问服务的接口
+          lower-case-service-id: true # 开启服务名小写
+#      routes:
+#        - id: consumer-application
+#          uri: lb://consumer-application #消费者模块的应用名
+#          predicates:
+#            - Path=/**

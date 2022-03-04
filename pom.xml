@@ -13,6 +13,7 @@
         <module>consumer</module>
         <module>eureka-server</module>
         <module>ribbon-native</module>
+        <module>gateway</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
