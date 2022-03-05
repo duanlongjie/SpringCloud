@@ -11,14 +11,50 @@ eureka:
 spring:
   application:
     name: gateway-application
+  redis:
+    host: 192.168.0.107
+    port: 6379
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true # Eureka 的默认路由,注册在eureka的实例，都可以通过  http://gatewayip:port/APPLICATION-NAME/..访问服务的接口
-          lower-case-service-id: true # 开启服务名小写
-#      routes:
-#        - id: consumer-application
-#          uri: lb://consumer-application #消费者模块的应用名
-#          predicates:
-#            - Path=/**
+          # 开启服务名小写
+          lower-case-service-id: true
+      #熔断回退配置
+      default-filters:
+        - StripPrefix=1
+        - name: Hystrix
+          args:
+            name: fallbackcmd
+            fallbackUri: forward:/fallback
+      routes:
+        - id: consumer-application
+          uri: lb://consumer-application #消费者模块的应用名
+          predicates:
+            - Path=/consumer-proxy/**
+          # 限流配置
+          filters:
+            - name: RequestRateLimiter
+              args:
+                # 允许用户每秒处理多少个请求。
+                redis-rate-limiter.replenishRate: 10
+                # 令牌桶的容量，允许在 1s 内完成的最大请求数。
+                redis-rate-limiter.burstCapacity: 20
+                # 使用 SpEL 按名称引用 bean。
+                key-resolver: "#{@ipKeyResolver}"
+        - id: provider-application
+          uri: lb://provider-application #生产者模块的应用名
+          predicates:
+            - Path=/provider-proxy/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+                key-resolver: "#{@ipKeyResolver}"
+feign:
+  hystrix:
+    enabled: true #开启Feign对Hystrix的支持
+
+

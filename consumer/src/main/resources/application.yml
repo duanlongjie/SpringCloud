@@ -15,9 +15,3 @@ eureka:
 feign:
   hystrix:
     enabled: true #开启Feign对Hystrix的支持
-zuul:
-  prefix: /duan
-#  routes:
-#    dlj:
-#      path: /dlj/**
-#      url: http://www.baidu.com

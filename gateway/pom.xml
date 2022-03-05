@@ -19,6 +19,19 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
+        <!--
+        开发高并发系统时有三把利器用来保护系统：缓存、降级和限流。API 网关作为所有请求的入口，
+        请求量大，我们可以通过对并发访问的请求进行限速来保护系统的可用性。
+        目前限流提供了基于 Redis 的实现，我们需要增加对应的依赖。
+        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis-reactive</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

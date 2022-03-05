@@ -18,6 +18,11 @@ public class UserControllerFeignFallbackFactory implements FallbackFactory<UserC
             public User get(Long id) {
                 return new User(null,"fallbackName","fallbackGender","fallbackPhone",1);
             }
+
+            @Override
+            public User save(User user) {
+                return new User(null,"fallbackName","fallbackGender","fallbackPhone",1);
+            }
         };
     }
 }

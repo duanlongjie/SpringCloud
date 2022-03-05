@@ -13,6 +13,10 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 生产者的接口，暴露给消费者（让消费者调用）。而不对外暴露
+ * 消费者的接口，可以暴露给客户端。如果用gateway的话，消费者的接口就暴露给gateway，就不对客户端暴露
+ */
 @RestController
 public class UserConsumerController {
     private static final Logger LOG = LoggerFactory.getLogger(UserConsumerController.class);
@@ -27,6 +31,11 @@ public class UserConsumerController {
     public User feignGet(@RequestParam("id") Long id) {
         LOG.info("id : {}", id);
         return userControllerFeign.get(id);
+    }
+    @PostMapping("feign/save")
+    public User feignSave(@RequestBody User user) {
+        LOG.info(user.toString());
+        return userControllerFeign.save(user);
     }
 
     @PostMapping("save")
