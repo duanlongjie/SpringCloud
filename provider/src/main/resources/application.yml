@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: provider2 #指定适用哪个配置进行启动
+    active: provider1 #指定适用哪个配置进行启动
 
 ---
 server:

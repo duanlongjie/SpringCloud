@@ -11,9 +11,10 @@ eureka:
 spring:
   application:
     name: gateway-application
-  redis:
-    host: 192.168.0.107
-    port: 6379
+# gateway 基于redis限流
+#  redis:
+#    host: 192.168.0.107
+#    port: 6379
   cloud:
     gateway:
       discovery:
@@ -21,7 +22,7 @@ spring:
           enabled: true # Eureka 的默认路由,注册在eureka的实例，都可以通过  http://gatewayip:port/APPLICATION-NAME/..访问服务的接口
           # 开启服务名小写
           lower-case-service-id: true
-      #熔断回退配置
+      #熔断回退配置 default-filters属于gateway熔断退回的全局配置方式，每个模块都可以熔断。还有针对具体模块的熔断配置（另说）
       default-filters:
         - StripPrefix=1
         - name: Hystrix
@@ -47,12 +48,16 @@ spring:
           uri: lb://provider-application #生产者模块的应用名
           predicates:
             - Path=/provider-proxy/**
-          filters:
-            - name: RequestRateLimiter
-              args:
-                redis-rate-limiter.replenishRate: 10
-                redis-rate-limiter.burstCapacity: 20
-                key-resolver: "#{@ipKeyResolver}"
+          # gateway 限流 基于redis
+#          filters:
+#            - name: RequestRateLimiter
+#              args:
+#                # 允许用户每秒处理多少个请求
+#                redis-rate-limiter.replenishRate: 10
+#                # 令牌桶的容量，允许在 1s 内完成的最大请求数
+#                redis-rate-limiter.burstCapacity: 20
+#                # 限流的bean
+#                key-resolver: "#{@ipKeyResolver}"
 feign:
   hystrix:
     enabled: true #开启Feign对Hystrix的支持
