@@ -13,7 +13,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * IP 的话，必然能直接访问到，这样是不安全的。
  * 所以我们需要对 Eureka 进行改造，加上权限认证来保证安全性。
  */
-
+//6666
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
